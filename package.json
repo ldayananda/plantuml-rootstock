@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "gulp"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "node-plantuml": "^0.6.2"
+  }
+}
