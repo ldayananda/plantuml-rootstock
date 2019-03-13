@@ -1,0 +1,59 @@
+<script src="../../node_modules/mermaid/dist/mermaid.js"></script>
+
+<input type="file" id="input" onchange="getGraphs(this.files)">
+<div id="graphDiv">
+</div>
+
+<script>
+  const element = document.querySelector("#graphDiv");
+
+  mermaid.initialize({
+    logLevel: 1,
+    cloneCssStyles: true,
+    flowchart: {
+      curve: "basis",
+      width: "100%",
+      useMaxWidth: true
+    }
+  });
+
+  const insertSvg = (svgCode) => {
+    element.innerHTML = svgCode;
+    console.log(svgCode);
+  };
+
+  const renderGraph = (fileName, graphDefinition) => {
+    const graph = mermaid.render('graphDiv', graphDefinition, insertSvg);
+    const newFilePath = `${fileName}.svg`;
+
+    const link = document.createElement('a');
+
+    link.setAttribute(
+      'href',
+      'data:text/plain;charset=utf-8,' +
+      encodeURIComponent(graph)
+    );
+    link.setAttribute('download', newFilePath);
+    link.innerText = "download me";
+    element.appendChild(link);
+  };
+
+  const getGraphs = (files) => {
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      if (/.*mermaid\.txt/.test(file)) {
+        break;
+      }
+
+      const reader = new FileReader();
+
+      reader.onloadend = (function() {
+        return renderGraph(file.name, reader.result);
+      }).bind(this);
+      reader.readAsText(file);
+    }
+};
+
+
+</script>

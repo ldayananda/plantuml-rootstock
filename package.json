@@ -1,9 +1,13 @@
 {
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "start:nom": "gulp nom",
+    "start:mermaid": "gulp mermaid"
   },
   "dependencies": {
     "gulp": "^3.9.1",
-    "node-plantuml": "^0.6.2"
+    "mermaid": "^8.0.0",
+    "node-plantuml": "^0.6.2",
+    "nomnoml": "^0.3.0"
   }
 }
